@@ -1,0 +1,799 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>San Diego International Airport (SAN) | Official Website</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #0076CE 0%, #00B4E5 100%);
+        }
+        
+        .flight-status-delayed {
+            border-left: 4px solid #F59E0B;
+        }
+        
+        .flight-status-ontime {
+            border-left: 4px solid #10B981;
+        }
+        
+        .flight-status-cancelled {
+            border-left: 4px solid #EF4444;
+        }
+        
+        .parking-spot {
+            transition: all 0.3s ease;
+        }
+        
+        .parking-spot:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-link:hover {
+            color: #0076CE;
+        }
+        
+        .nav-link:hover::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: #0076CE;
+            margin-top: 2px;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        
+        .map-container {
+            height: 400px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Top Alert Bar -->
+    <div class="bg-yellow-100 text-yellow-800 py-2 px-4 text-sm text-center">
+        <i class="fas fa-exclamation-circle mr-2"></i>
+        <span class="font-medium">Travel Alert:</span> Increased security measures in effect. Allow extra time for check-in and security screening.
+    </div>
+    
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <img src="https://www.san.org/Portals/_default/Skins/SAN/images/logo.png" alt="San Diego International Airport Logo" class="h-12">
+                <div class="ml-2">
+                    <h1 class="text-xl font-bold text-gray-800">San Diego International</h1>
+                    <p class="text-xs text-gray-500">SAN</p>
+                </div>
+            </div>
+            
+            <!-- Main Navigation -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="#flights" class="nav-link text-gray-700 font-medium">Flights</a>
+                <a href="#parking" class="nav-link text-gray-700 font-medium">Parking</a>
+                <a href="#transportation" class="nav-link text-gray-700 font-medium">Transportation</a>
+                <a href="#services" class="nav-link text-gray-700 font-medium">Services</a>
+                <a href="#shopping" class="nav-link text-gray-700 font-medium">Shopping & Dining</a>
+            </nav>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-gray-700">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white py-2 px-4 shadow-lg">
+            <a href="#flights" class="block py-2 text-gray-700">Flights</a>
+            <a href="#parking" class="block py-2 text-gray-700">Parking</a>
+            <a href="#transportation" class="block py-2 text-gray-700">Transportation</a>
+            <a href="#services" class="block py-2 text-gray-700">Services</a>
+            <a href="#shopping" class="block py-2 text-gray-700">Shopping & Dining</a>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-16">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-8 md:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Welcome to San Diego International Airport</h1>
+                <p class="text-xl mb-6">Your gateway to America's Finest City. Fly nonstop to over 80 destinations worldwide.</p>
+                <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+                    <a href="#flights" class="bg-white text-blue-600 font-semibold py-3 px-6 rounded-lg text-center hover:bg-gray-100 transition duration-300">
+                        <i class="fas fa-plane-departure mr-2"></i> Flight Status
+                    </a>
+                    <a href="#parking" class="bg-transparent border-2 border-white font-semibold py-3 px-6 rounded-lg text-center hover:bg-white hover:text-blue-600 transition duration-300">
+                        <i class="fas fa-parking mr-2"></i> Reserve Parking
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <img src="https://www.san.org/Portals/_default/Skins/SAN/images/terminal2-west.jpg" alt="San Diego Airport Terminal" class="rounded-lg shadow-xl max-w-full h-auto">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Quick Links -->
+    <section class="bg-gray-100 py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <a href="#" class="bg-white p-4 rounded-lg shadow-sm flex items-center hover:shadow-md transition duration-300">
+                    <div class="bg-blue-100 p-3 rounded-full mr-4">
+                        <i class="fas fa-clock text-blue-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-800">Wait Times</h3>
+                        <p class="text-sm text-gray-500">Security checkpoint wait times</p>
+                    </div>
+                </a>
+                <a href="#" class="bg-white p-4 rounded-lg shadow-sm flex items-center hover:shadow-md transition duration-300">
+                    <div class="bg-green-100 p-3 rounded-full mr-4">
+                        <i class="fas fa-map-marked-alt text-green-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-800">Terminal Map</h3>
+                        <p class="text-sm text-gray-500">Navigate the airport</p>
+                    </div>
+                </a>
+                <a href="#" class="bg-white p-4 rounded-lg shadow-sm flex items-center hover:shadow-md transition duration-300">
+                    <div class="bg-purple-100 p-3 rounded-full mr-4">
+                        <i class="fas fa-suitcase-rolling text-purple-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-800">Baggage Info</h3>
+                        <p class="text-sm text-gray-500">Lost & found, fees</p>
+                    </div>
+                </a>
+                <a href="#" class="bg-white p-4 rounded-lg shadow-sm flex items-center hover:shadow-md transition duration-300">
+                    <div class="bg-yellow-100 p-3 rounded-full mr-4">
+                        <i class="fas fa-concierge-bell text-yellow-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-800">Services</h3>
+                        <p class="text-sm text-gray-500">Lounges, WiFi, more</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Flight Status Section -->
+    <section id="flights" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Flight Information</h2>
+            
+            <!-- Flight Search -->
+            <div class="bg-gray-100 rounded-xl p-6 mb-12">
+                <div class="flex flex-col md:flex-row md:space-x-4 mb-4">
+                    <div class="w-full md:w-1/3 mb-4 md:mb-0">
+                        <label class="block text-gray-700 font-medium mb-2">Flight Type</label>
+                        <div class="flex space-x-2">
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg flex-1">Arrivals</button>
+                            <button class="bg-gray-300 text-gray-700 px-4 py-2 rounded-lg flex-1">Departures</button>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/3 mb-4 md:mb-0">
+                        <label class="block text-gray-700 font-medium mb-2">Airline</label>
+                        <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option>All Airlines</option>
+                            <option>Alaska Airlines</option>
+                            <option>American Airlines</option>
+                            <option>Delta Air Lines</option>
+                            <option>Southwest Airlines</option>
+                            <option>United Airlines</option>
+                        </select>
+                    </div>
+                    <div class="w-full md:w-1/3">
+                        <label class="block text-gray-700 font-medium mb-2">Flight Number</label>
+                        <input type="text" placeholder="e.g. AA123" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+                <button class="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium w-full md:w-auto">
+                    <i class="fas fa-search mr-2"></i> Search Flights
+                </button>
+            </div>
+            
+            <!-- Flight Status Table -->
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white rounded-lg overflow-hidden">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="py-3 px-4 text-left text-gray-700 font-semibold">Time</th>
+                            <th class="py-3 px-4 text-left text-gray-700 font-semibold">Airline</th>
+                            <th class="py-3 px-4 text-left text-gray-700 font-semibold">Flight</th>
+                            <th class="py-3 px-4 text-left text-gray-700 font-semibold">Destination</th>
+                            <th class="py-3 px-4 text-left text-gray-700 font-semibold">Gate</th>
+                            <th class="py-3 px-4 text-left text-gray-700 font-semibold">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr class="hover:bg-gray-50 flight-status-ontime">
+                            <td class="py-4 px-4">8:45 AM</td>
+                            <td class="py-4 px-4 flex items-center">
+                                <img src="https://logo.clearbit.com/alaskaair.com" alt="Alaska Airlines" class="h-6 mr-2">
+                                <span>Alaska</span>
+                            </td>
+                            <td class="py-4 px-4 font-medium">AS 334</td>
+                            <td class="py-4 px-4">Seattle (SEA)</td>
+                            <td class="py-4 px-4">T2-24</td>
+                            <td class="py-4 px-4 text-green-600 font-medium">On Time</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 flight-status-delayed">
+                            <td class="py-4 px-4">9:15 AM</td>
+                            <td class="py-4 px-4 flex items-center">
+                                <img src="https://logo.clearbit.com/southwest.com" alt="Southwest Airlines" class="h-6 mr-2">
+                                <span>Southwest</span>
+                            </td>
+                            <td class="py-4 px-4 font-medium">WN 1234</td>
+                            <td class="py-4 px-4">Denver (DEN)</td>
+                            <td class="py-4 px-4">T1-15</td>
+                            <td class="py-4 px-4 text-yellow-600 font-medium">Delayed 45 min</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-4 px-4">9:30 AM</td>
+                            <td class="py-4 px-4 flex items-center">
+                                <img src="https://logo.clearbit.com/aa.com" alt="American Airlines" class="h-6 mr-2">
+                                <span>American</span>
+                            </td>
+                            <td class="py-4 px-4 font-medium">AA 567</td>
+                            <td class="py-4 px-4">Dallas (DFW)</td>
+                            <td class="py-4 px-4">T2-18</td>
+                            <td class="py-4 px-4 text-green-600 font-medium">On Time</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 flight-status-cancelled">
+                            <td class="py-4 px-4">10:00 AM</td>
+                            <td class="py-4 px-4 flex items-center">
+                                <img src="https://logo.clearbit.com/united.com" alt="United Airlines" class="h-6 mr-2">
+                                <span>United</span>
+                            </td>
+                            <td class="py-4 px-4 font-medium">UA 789</td>
+                            <td class="py-4 px-4">San Francisco (SFO)</td>
+                            <td class="py-4 px-4">T1-22</td>
+                            <td class="py-4 px-4 text-red-600 font-medium">Cancelled</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-4 px-4">10:45 AM</td>
+                            <td class="py-4 px-4 flex items-center">
+                                <img src="https://logo.clearbit.com/delta.com" alt="Delta Airlines" class="h-6 mr-2">
+                                <span>Delta</span>
+                            </td>
+                            <td class="py-4 px-4 font-medium">DL 456</td>
+                            <td class="py-4 px-4">Atlanta (ATL)</td>
+                            <td class="py-4 px-4">T2-30</td>
+                            <td class="py-4 px-4 text-green-600 font-medium">On Time</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="mt-8 text-center">
+                <button class="bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-300 transition duration-300">
+                    View All Flights <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Parking Section -->
+    <section id="parking" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Parking Options</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <!-- Terminal Parking -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden parking-spot">
+                    <img src="https://www.san.org/Portals/_default/Skins/SAN/images/parking-terminal.jpg" alt="Terminal Parking" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-gray-800">Terminal Parking</h3>
+                            <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded">Available</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Closest parking to terminals. Hourly and daily rates.</p>
+                        <div class="flex justify-between items-center mb-4">
+                            <div>
+                                <span class="text-gray-500 text-sm">Hourly Rate</span>
+                                <p class="font-medium">$4.00</p>
+                            </div>
+                            <div>
+                                <span class="text-gray-500 text-sm">Daily Max</span>
+                                <p class="font-medium">$28.00</p>
+                            </div>
+                        </div>
+                        <button class="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition duration-300">
+                            Reserve Now
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Economy Parking -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden parking-spot">
+                    <img src="https://www.san.org/Portals/_default/Skins/SAN/images/parking-economy.jpg" alt="Economy Parking" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-gray-800">Economy Parking</h3>
+                            <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-1 rounded">Available</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Budget-friendly option with free shuttle service to terminals.</p>
+                        <div class="flex justify-between items-center mb-4">
+                            <div>
+                                <span class="text-gray-500 text-sm">Hourly Rate</span>
+                                <p class="font-medium">$3.00</p>
+                            </div>
+                            <div>
+                                <span class="text-gray-500 text-sm">Daily Max</span>
+                                <p class="font-medium">$15.00</p>
+                            </div>
+                        </div>
+                        <button class="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition duration-300">
+                            Reserve Now
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Valet Parking -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden parking-spot">
+                    <img src="https://www.san.org/Portals/_default/Skins/SAN/images/parking-valet.jpg" alt="Valet Parking" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-gray-800">Valet Parking</h3>
+                            <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2 py-1 rounded">Limited</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Premium service with the ultimate convenience.</p>
+                        <div class="flex justify-between items-center mb-4">
+                            <div>
+                                <span class="text-gray-500 text-sm">Hourly Rate</span>
+                                <p class="font-medium">$7.00</p>
+                            </div>
+                            <div>
+                                <span class="text-gray-500 text-sm">Daily Max</span>
+                                <p class="font-medium">$40.00</p>
+                            </div>
+                        </div>
+                        <button class="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition duration-300">
+                            Reserve Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Parking Map -->
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Parking Map & Availability</h3>
+                <div class="map-container bg-gray-200 relative">
+                    <!-- This would be replaced with an actual map in production -->
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <i class="fas fa-map-marked-alt text-5xl text-gray-400"></i>
+                    </div>
+                </div>
+                <div class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 bg-green-500 rounded-full mr-2"></div>
+                        <span class="text-sm">Available</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 bg-yellow-500 rounded-full mr-2"></div>
+                        <span class="text-sm">Limited</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 bg-red-500 rounded-full mr-2"></div>
+                        <span class="text-sm">Full</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
+                        <span class="text-sm">Reserved</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Transportation Section -->
+    <section id="transportation" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Transportation Options</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Rental Cars -->
+                <div class="bg-gray-50 rounded-xl p-6">
+                    <div class="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-car text-blue-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Rental Cars</h3>
+                    <p class="text-gray-600 mb-4">All major rental car companies available at the Rental Car Center with free shuttle service.</p>
+                    <div class="grid grid-cols-2 gap-2 mb-4">
+                        <span class="text-sm flex items-center"><i class="fas fa-check-circle text-green-500 mr-1"></i> Alamo</span>
+                        <span class="text-sm flex items-center"><i class="fas fa-check-circle text-green-500 mr-1"></i> Avis</span>
+                        <span class="text-sm flex items-center"><i class="fas fa-check-circle text-green-500 mr-1"></i> Budget</span>
+                        <span class="text-sm flex items-center"><i class="fas fa-check-circle text-green-500 mr-1"></i> Enterprise</span>
+                        <span class="text-sm flex items-center"><i class="fas fa-check-circle text-green-500 mr-1"></i> Hertz</span>
+                        <span class="text-sm flex items-center"><i class="fas fa-check-circle text-green-500 mr-1"></i> National</span>
+                    </div>
+                    <button class="text-blue-600 font-medium flex items-center">
+                        View All <i class="fas fa-chevron-right ml-1 text-sm"></i>
+                    </button>
+                </div>
+                
+                <!-- Rideshare -->
+                <div class="bg-gray-50 rounded-xl p-6">
+                    <div class="bg-purple-100 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-taxi text-purple-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Rideshare & Taxis</h3>
+                    <p class="text-gray-600 mb-4">Uber, Lyft, and taxis available at designated pickup areas outside baggage claim.</p>
+                    <div class="mb-4">
+                        <p class="font-medium text-gray-800 mb-1">Approximate Fares:</p>
+                        <div class="text-sm text-gray-600">
+                            <p>Downtown: $15-25</p>
+                            <p>La Jolla: $25-35</p>
+                            <p>Coronado: $20-30</p>
+                        </div>
+                    </div>
+                    <button class="text-blue-600 font-medium flex items-center">
+                        Learn More <i class="fas fa-chevron-right ml-1 text-sm"></i>
+                    </button>
+                </div>
+                
+                <!-- Public Transit -->
+                <div class="bg-gray-50 rounded-xl p-6">
+                    <div class="bg-green-100 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-bus text-green-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Public Transportation</h3>
+                    <p class="text-gray-600 mb-4">MTS buses and the San Diego Trolley provide affordable transportation options.</p>
+                    <div class="mb-4">
+                        <p class="font-medium text-gray-800 mb-1">Popular Routes:</p>
+                        <div class="text-sm text-gray-600">
+                            <p>Route 992: Downtown</p>
+                            <p>Green Line Trolley: Mission Valley</p>
+                            <p>Route 923: Old Town</p>
+                        </div>
+                    </div>
+                    <button class="text-blue-600 font-medium flex items-center">
+                        View Schedules <i class="fas fa-chevron-right ml-1 text-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Airport Services</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition duration-300">
+                    <div class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-wifi text-blue-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Free WiFi</h3>
+                    <p class="text-gray-600 text-sm">Connect to "SAN-Free-WiFi" throughout the airport with no time limits.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition duration-300">
+                    <div class="bg-purple-100 w-10 h-10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-suitcase text-purple-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Baggage Carts</h3>
+                    <p class="text-gray-600 text-sm">Available for $6 at various locations in baggage claim and terminals.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition duration-300">
+                    <div class="bg-yellow-100 w-10 h-10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-baby text-yellow-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Nursing Suites</h3>
+                    <p class="text-gray-600 text-sm">Private rooms for nursing mothers located in all terminals.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition duration-300">
+                    <div class="bg-green-100 w-10 h-10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-paw text-green-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Pet Relief Areas</h3>
+                    <p class="text-gray-600 text-sm">Designated areas for pet relief located outside each terminal.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition duration-300">
+                    <div class="bg-red-100 w-10 h-10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-medal text-red-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">USO Lounge</h3>
+                    <p class="text-gray-600 text-sm">For active military and their families in Terminal 2, near Gate 50.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition duration-300">
+                    <div class="bg-indigo-100 w-10 h-10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-wheelchair text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Accessibility</h3>
+                    <p class="text-gray-600 text-sm">Wheelchair assistance, TTY phones, and other ADA services available.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition duration-300">
+                    <div class="bg-pink-100 w-10 h-10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-umbrella-beach text-pink-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Airport Lounges</h3>
+                    <p class="text-gray-600 text-sm">Escape the crowds in our premium lounges available to all travelers for a fee.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition duration-300">
+                    <div class="bg-teal-100 w-10 h-10 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-exchange-alt text-teal-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Currency Exchange</h3>
+                    <p class="text-gray-600 text-sm">Travelex locations in Terminal 1 and Terminal 2 for your convenience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Shopping & Dining Section -->
+    <section id="shopping" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Shopping & Dining</h2>
+            
+            <div class="flex flex-col md:flex-row mb-8">
+                <div class="md:w-1/2 mb-6 md:mb-0 md:pr-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Featured Restaurants</h3>
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="flex items-start p-4 border border-gray-200 rounded-lg hover:bg-gray-50">
+                            <img src="https://via.placeholder.com/80" alt="Phil's BBQ" class="w-20 h-20 rounded-lg object-cover mr-4">
+                            <div>
+                                <h4 class="font-medium text-gray-800">Phil's BBQ</h4>
+                                <p class="text-sm text-gray-600 mb-1">Terminal 2, Near Gate 40</p>
+                                <div class="flex items-center text-yellow-400 text-sm">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span class="text-gray-600 ml-1">(428)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-start p-4 border border-gray-200 rounded-lg hover:bg-gray-50">
+                            <img src="https://via.placeholder.com/80" alt="Stone Brewing" class="w-20 h-20 rounded-lg object-cover mr-4">
+                            <div>
+                                <h4 class="font-medium text-gray-800">Stone Brewing</h4>
+                                <p class="text-sm text-gray-600 mb-1">Terminal 2, Near Gate 30</p>
+                                <div class="flex items-center text-yellow-400 text-sm">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="text-gray-600 ml-1">(312)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 md:pl-4">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Featured Shops</h3>
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="flex items-start p-4 border border-gray-200 rounded-lg hover:bg-gray-50">
+                            <img src="https://via.placeholder.com/80" alt="San Diego Surf Shop" class="w-20 h-20 rounded-lg object-cover mr-4">
+                            <div>
+                                <h4 class="font-medium text-gray-800">San Diego Surf Shop</h4>
+                                <p class="text-sm text-gray-600 mb-1">Terminal 1, Near Gate 12</p>
+                                <p class="text-sm text-gray-600">Local surfwear, souvenirs, and beach gear.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start p-4 border border-gray-200 rounded-lg hover:bg-gray-50">
+                            <img src="https://via.placeholder.com/80" alt="Tech on the Go" class="w-20 h-20 rounded-lg object-cover mr-4">
+                            <div>
+                                <h4 class="font-medium text-gray-800">Tech on the Go</h4>
+                                <p class="text-sm text-gray-600 mb-1">Terminal 2, Near Gate 35</p>
+                                <p class="text-sm text-gray-600">Last-minute electronics, headphones, and chargers.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <button class="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition duration-300">
+                    <i class="fas fa-store mr-2"></i> View All Shopping & Dining Options
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Airport Map Section -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Airport Map</h2>
+            
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <div class="flex flex-col md:flex-row">
+                    <div class="md:w-1/3 mb-6 md:mb-0 md:pr-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">Terminal Guide</h3>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-medium text-gray-800 mb-2">Terminal 1</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li><i class="fas fa-plane-departure text-blue-500 mr-2"></i> Southwest Airlines</li>
+                                <li><i class="fas fa-utensils text-yellow-500 mr-2"></i> 12 Restaurants & Cafés</li>
+                                <li><i class="fas fa-shopping-bag text-purple-500 mr-2"></i> 8 Retail Shops</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-medium text-gray-800 mb-2">Terminal 2</h4>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li><i class="fas fa-plane-departure text-blue-500 mr-2"></i> Alaska, American, Delta, United</li>
+                                <li><i class="fas fa-utensils text-yellow-500 mr-2"></i> 18 Restaurants & Bars</li>
+                                <li><i class="fas fa-shopping-bag text-purple-500 mr-2"></i> 15 Retail Shops</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-medium text-gray-800 mb-2">Amenities</h4>
+                            <div class="grid grid-cols-2 gap-2 text-sm">
+                                <span class="flex items-center"><i class="fas fa-wifi text-blue-500 mr-1"></i> WiFi</span>
+                                <span class="flex items-center"><i class="fas fa-baby text-pink-500 mr-1"></i> Nursing</span>
+                                <span class="flex items-center"><i class="fas fa-wheelchair text-green-500 mr-1"></i> ADA</span>
+                                <span class="flex items-center"><i class="fas fa-luggage-cart text-orange-500 mr-1"></i> Baggage</span>
+                                <span class="flex items-center"><i class="fas fa-paw text-brown-500 mr-1"></i> Pet Relief</span>
+                                <span class="flex items-center"><i class="fas fa-charging-station text-purple-500 mr-1"></i> Charging</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-2/3">
+                        <div class="map-container bg-gray-200 relative">
+                            <!-- This would be replaced with an actual interactive map in production -->
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <i class="fas fa-map-marked-alt text-6xl text-gray-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Newsletter Section -->
+    <section class="py-16 bg-blue-600 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-4">Stay Connected</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Sign up for airport updates, travel tips, and exclusive offers.</p>
+            
+            <div class="max-w-md mx-auto flex flex-col sm:flex-row gap-2">
+                <input type="email" placeholder="Your email address" class="flex-grow px-4 py-3 rounded-lg focus:outline-none text-gray-800">
+                <button class="bg-white text-blue-600 font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 transition duration-300">
+                    Subscribe
+                </button>
+            </div>
+            
+            <p class="text-sm mt-4 text-blue-100">We respect your privacy. Unsubscribe at any time.</p>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">About SAN</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">About Us</a></li>
+                        <li><a href="#" class="hover:text-white">Airport Authority</a></li>
+                        <li><a href="#" class="hover:text-white">News & Media</a></li>
+                        <li><a href="#" class="hover:text-white">Careers</a></li>
+                        <li><a href="#" class="hover:text-white">Sustainability</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Traveler Info</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">Security Procedures</a></li>
+                        <li><a href="#" class="hover:text-white">Accessibility</a></li>
+                        <li><a href="#" class="hover:text-white">Lost & Found</a></li>
+                        <li><a href="#" class="hover:text-white">Traveling with Pets</a></li>
+                        <li><a href="#" class="hover:text-white">Traveling with Children</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Business</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">Doing Business With Us</a></li>
+                        <li><a href="#" class="hover:text-white">Concessions Opportunities</a></li>
+                        <li><a href="#" class="hover:text-white">Construction Updates</a></li>
+                        <li><a href="#" class="hover:text-white">Noise Abatement</a></li>
+                        <li><a href="#" class="hover:text-white">Economic Impact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center"><i class="fas fa-map-marker-alt mr-2 text-blue-400"></i> 3225 N Harbor Dr, San Diego, CA 92101</li>
+                        <li class="flex items-center"><i class="fas fa-phone-alt mr-2 text-blue-400"></i> (619) 400-2400</li>
+                        <li class="flex items-center"><i class="fas fa-envelope mr-2 text-blue-400"></i> info@san.org</li>
+                        <li class="flex items-center mt-4 space-x-4">
+                            <a href="#" class="text-white hover:text-blue-400"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="text-white hover:text-blue-400"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-white hover:text-blue-400"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="text-white hover:text-blue-400"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="text-white hover:text-blue-400"><i class="fab fa-youtube"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <img src="https://www.san.org/Portals/_default/Skins/SAN/images/logo-white.png" alt="San Diego International Airport Logo" class="h-10">
+                </div>
+                <div class="text-sm text-gray-400">
+                    <p>&copy; 2023 San Diego International Airport. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+        
+        // Flight status tabs
+        const flightTypeButtons = document.querySelectorAll('#flights button');
+        flightTypeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                flightTypeButtons.forEach(btn => {
+                    btn.classList.remove('bg-blue-600', 'text-white');
+                    btn.classList.add('bg-gray-300', 'text-gray-700');
+                });
+                this.classList.remove('bg-gray-300', 'text-gray-700');
+                this.classList.add('bg-blue-600', 'text-white');
+            });
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
